@@ -47,16 +47,16 @@ public class SimpleJOGL implements GLEventListener {
         frame.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    xrot -= 5.0f;
+                    xrot -= 15.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    xrot += 5.0f;
+                    xrot += 15.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    yrot += 5.0f;
+                    yrot += 15.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    yrot -= 5.0f;
+                    yrot -= 15.0f;
                 }
             }
 
@@ -106,47 +106,51 @@ public class SimpleJOGL implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
-        // Clear the drawing area
+
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-        // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
-        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
-        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
-        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
-        //Tu piszemy kod tworz¹cy obiekty 3D
-        gl.glBegin(GL.GL_TRIANGLES);
-//œciana przednia
-        gl.glColor3f(1.0f, 0.0f, 0.0f); //czerwona
-            gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-            gl.glVertex3f(1.0f, -1.0f, 1.0f);
-            gl.glVertex3f(0.0f, 1.0f, 0.0f);
-//sciana tylnia
-        gl.glColor3f(1.0f, 0.5f, 0.5f); //rozowa
-            gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-            gl.glVertex3f(0.0f, 1.0f, 0.0f);
-            gl.glVertex3f(1.0f, -1.0f, -1.0f);
-//œciana lewa
-        gl.glColor3f(0.0f, 1.0f, 0.0f); //ZIELONA
-            gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-            gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-            gl.glVertex3f(0.0f, 1.0f, 0.0f);
-//œciana prawa
-        gl.glColor3f(1.0f, 1.0f, 0.0f); //zolta
-            gl.glVertex3f(0.0f, 1.0f, 0.0f);
-            gl.glVertex3f(1.0f, -1.0f, 1.0f);
-            gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        
-//œciana dolna
+        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
+        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
+        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
+
+        gl.glFlush();
+        float x, y, kat;
+
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(-1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, -1.0f); //?rodek
+        //for (kat = (float) (2.0f * Math.PI); kat > 0.0; kat -= (Math.PI / 32.0f)) {
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 1.5f * (float) Math.sin(kat);
+            y = 1.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, -1.0f); //kolejne punkty
+        }
         gl.glEnd();
-        gl.glBegin(GL.GL_QUADS);
-        
-        gl.glColor3f(1.0f, 0.0f, 1.0f);
-            gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-            gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-            gl.glVertex3f(1.0f, -1.0f, -1.0f);
-            gl.glVertex3f(1.0f, -1.0f, 1.0f);
-            
+
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(-1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 1.0f); //?rodek
+        for (kat = (float) (2.0f * Math.PI); kat > 0.0; kat -= (Math.PI / 32.0f)) {
+        //for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 1.5f * (float) Math.sin(kat);
+            y = 1.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 1.0f); //kolejne punkty
+        }
         gl.glEnd();
+        
+        gl.glBegin(GL.GL_QUAD_STRIP);
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        
+        //?rodek
+        //for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+        for (kat = 0.0f; kat < (2.0f * Math.PI); kat += (Math.PI / 32.0f)) {
+            x = 1.5f * (float) Math.sin(kat);
+            y = 1.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, -1.0f);
+            gl.glVertex3f(x, y, 1.0f);//kolejne punkty
+        }
+        gl.glEnd();
+        
         // Flush all drawing operations to the graphics card
         gl.glFlush();
     }
