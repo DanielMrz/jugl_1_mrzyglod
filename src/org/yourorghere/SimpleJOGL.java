@@ -47,16 +47,16 @@ public class SimpleJOGL implements GLEventListener {
         frame.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    xrot -= 1.0f;
+                    xrot -= 5.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    xrot += 1.0f;
+                    xrot += 5.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    yrot += 1.0f;
+                    yrot += 5.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    yrot -= 1.0f;
+                    yrot -= 5.0f;
                 }
             }
 
@@ -146,7 +146,7 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
 //górna
-        gl.glColor3f(1.0f, 0.0f, 1.0f);
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
