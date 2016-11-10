@@ -20,6 +20,7 @@ public class Koparka {
     }
     
     public void ZmienKat3(float kat3){ //ramie 3
+        if(this.kat3<=25.0f)
         this.kat3+=kat3;
     }
     
