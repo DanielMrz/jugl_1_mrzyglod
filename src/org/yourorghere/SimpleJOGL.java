@@ -35,8 +35,8 @@ public class SimpleJOGL implements GLEventListener {
     public static float lightPos[] = {-50.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
     public static float lightPos2[] = {-150.0f, -150.0f, 50.0f, 1.0f};//pozycja ?wiat?a
     static Koparka koparka;
-    static BufferedImage image1 = null, image2 = null;
-    static Texture t1 = null, t2 = null;
+    static BufferedImage image1 = null, image2 = null, image3 = null, image4 = null;
+    static Texture t1 = null, t2 = null, t3 = null, t4 = null;
 
     public static void main(String[] args) {
 
@@ -161,6 +161,8 @@ public class SimpleJOGL implements GLEventListener {
         try {
             image1 = ImageIO.read(getClass().getResourceAsStream("/img1.bmp"));
             image2 = ImageIO.read(getClass().getResourceAsStream("/img2.bmp"));
+            image3 = ImageIO.read(getClass().getResourceAsStream("/img3.bmp"));
+            image4 = ImageIO.read(getClass().getResourceAsStream("/img4.bmp"));
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, exc.toString());
             return;
@@ -168,7 +170,8 @@ public class SimpleJOGL implements GLEventListener {
 
         t1 = TextureIO.newTexture(image1, false);
         t2 = TextureIO.newTexture(image2, false);
-
+         t3 = TextureIO.newTexture(image3, false);
+          t4 = TextureIO.newTexture(image4, false);
         gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_BLEND | GL.GL_MODULATE);
         gl.glEnable(GL.GL_TEXTURE_2D);
         gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
@@ -223,7 +226,7 @@ public class SimpleJOGL implements GLEventListener {
 
         gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
         gl.glBegin(GL.GL_QUADS);
-//?ciana przednia
+//sciana przednia
         //gl.glColor3f(0.8f, 0.0f, 0.0f);
         gl.glNormal3f(0.0f, 0.0f, 1.0f);
         gl.glTexCoord2f(1.0f, 1.0f); 
@@ -234,10 +237,11 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(1.0f, 1.0f, 1.0f);
         gl.glTexCoord2f(1.0f, 0.0f); 
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        //gl.glEnd();
+        gl.glEnd();
         
         
-        
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
 //sciana tylniaa
         //gl.glColor3f(0.8f, 0.0f, 0.0f);
         gl.glNormal3f(0.0f, 0.0f, -1.0f);
@@ -249,6 +253,11 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glEnd();
+      
+        
+         gl.glBindTexture(GL.GL_TEXTURE_2D, t3.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
 //?ciana lewa
         //gl.glColor3f(0.8f, 0.0f, 0.0f);
         gl.glNormal3f(-1.0f, 0.0f, 0.0f);
@@ -260,6 +269,10 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
         gl.glTexCoord2f(1.0f, 0.0f); 
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glEnd();
+        
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t4.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
 //?ciana prawa
         //gl.glColor3f(0.8f, 0.0f, 0.0f);
         gl.glNormal3f(1.0f, 0.0f, 0.0f);
@@ -282,6 +295,7 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glEnd();
 //sciana gorna
         //gl.glColor3f(0.8f, 0.0f, 0.0f);
         gl.glNormal3f(0.0f, 1.0f, 0.0f);
