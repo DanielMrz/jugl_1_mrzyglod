@@ -160,8 +160,10 @@ public class SimpleJOGL implements GLEventListener {
         try {
             image1 = ImageIO.read(getClass().getResourceAsStream("/img1.bmp")); //przednia
             image2 = ImageIO.read(getClass().getResourceAsStream("/niebo.jpg"));    //tylna
-            image3 = ImageIO.read(getClass().getResourceAsStream("/trawa.jpg"));
-            image4 = ImageIO.read(getClass().getResourceAsStream("/img4.bmp"));
+            image3 = ImageIO.read(getClass().getResourceAsStream("/trawa.jpg"));    //lewa
+            image4 = ImageIO.read(getClass().getResourceAsStream("/img4.bmp"));     //prawa
+            image4 = ImageIO.read(getClass().getResourceAsStream("/img4.bmp"));     //dolna
+            image4 = ImageIO.read(getClass().getResourceAsStream("/img4.bmp"));     //gorna
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, exc.toString());
             return;
